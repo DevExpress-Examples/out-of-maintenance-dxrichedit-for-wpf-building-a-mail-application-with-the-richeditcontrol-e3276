@@ -1,5 +1,4 @@
-﻿Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.IO
 Imports System.Net.Mail
@@ -21,6 +20,7 @@ Namespace RichEditSendMail
 	''' </summary>
 	Partial Public Class MainWindow
 		Inherits Window
+
 		Public Sub New()
 			ThemeManager.ApplicationThemeName = "Office2007Silver"
 			InitializeComponent()
@@ -52,6 +52,7 @@ Namespace RichEditSendMail
 		End Sub
 		Public Class RichEditMailMessageExporter
 			Implements IUriProvider
+
 			Private ReadOnly control As RichEditControl
 			Private ReadOnly message As MailMessage
 			Private attachments As List(Of AttachementInfo)
@@ -100,10 +101,10 @@ Namespace RichEditSendMail
 
 			#Region "IUriProvider Members"
 
-			Public Function CreateCssUri(ByVal rootUri As String, ByVal styleText As String, ByVal relativeUri As String) As String Implements IUriProvider.CreateCssUri
+			Public Function CreateCssUri(ByVal rootUri As String, ByVal styleText As String, ByVal relativeUri As String) As String
 				Return String.Empty
 			End Function
-			Public Function CreateImageUri(ByVal rootUri As String, ByVal image As OfficeImage, ByVal relativeUri As String) As String Implements IUriProvider.CreateImageUri
+			Public Function CreateImageUri(ByVal rootUri As String, ByVal image As OfficeImage, ByVal relativeUri As String) As String
 				Dim imageName As String = String.Format("image{0}", imageId)
 				imageId += 1
 
@@ -128,29 +129,32 @@ Namespace RichEditSendMail
 		End Class
 
 		Public Class AttachementInfo
-			Private stream_Renamed As Stream
-			Private mimeType_Renamed As String
-			Private contentId_Renamed As String
+'INSTANT VB NOTE: The field stream was renamed since Visual Basic does not allow fields to have the same name as other class members:
+			Private stream_Conflict As Stream
+'INSTANT VB NOTE: The field mimeType was renamed since Visual Basic does not allow fields to have the same name as other class members:
+			Private mimeType_Conflict As String
+'INSTANT VB NOTE: The field contentId was renamed since Visual Basic does not allow fields to have the same name as other class members:
+			Private contentId_Conflict As String
 
 			Public Sub New(ByVal stream As Stream, ByVal mimeType As String, ByVal contentId As String)
-				Me.stream_Renamed = stream
-				Me.mimeType_Renamed = mimeType
-				Me.contentId_Renamed = contentId
+				Me.stream_Conflict = stream
+				Me.mimeType_Conflict = mimeType
+				Me.contentId_Conflict = contentId
 			End Sub
 
 			Public ReadOnly Property Stream() As Stream
 				Get
-					Return stream_Renamed
+					Return stream_Conflict
 				End Get
 			End Property
 			Public ReadOnly Property MimeType() As String
 				Get
-					Return mimeType_Renamed
+					Return mimeType_Conflict
 				End Get
 			End Property
 			Public ReadOnly Property ContentId() As String
 				Get
-					Return contentId_Renamed
+					Return contentId_Conflict
 				End Get
 			End Property
 		End Class
